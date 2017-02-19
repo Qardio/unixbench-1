@@ -1,12 +1,14 @@
 FROM ubuntu:latest
-MAINTAINER Borja Burgos <borja@tutum.co>
+MAINTAINER Devops Qardio <devops@getqardio.com>
+#MAINTAINER Borja Burgos <borja@tutum.co>
 
 # Install Dependencies
 RUN apt-get update && \
-	apt-get install -y build-essential libx11-dev libgl1-mesa-dev libxext-dev perl perl-modules make curl && \
+	apt-get install -y build-essential libx11-dev libgl1-mesa-dev libxext-dev perl perl-modules make git && \
 	apt-get clean
 
-RUN mkdir -p /app && curl -LsS http://byte-unixbench.googlecode.com/files/UnixBench5.1.3.tgz | tar -zxf - -C /app && chmod +x /app/UnixBench/Run
+RUN git clone https://github.com/Qardio/byte-unixbench.git /tmp/byte-unixbench
+RUN mkdir -p /app && mv /tmp/byte-unixbench/UnixBench /app && chmod +x /app/UnixBench/Run
 WORKDIR /app/UnixBench
 
 ENTRYPOINT ["/app/UnixBench/Run"]

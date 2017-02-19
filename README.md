@@ -23,6 +23,8 @@ If you wish not to run all tests, you can choose to run only specific tests:
 
 	docker run tutum/unixbench testname1 testname2 testname3
 
+    docker run --rm tutum/unixbench dhry2reg whetstone-double shell1 long float hanoi
+
 Results
 -------
 
